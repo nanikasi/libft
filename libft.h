@@ -18,10 +18,11 @@ int		ft_isdigit(unsigned char c);
 int		ft_isalnum(unsigned char c);
 int		ft_isascii(int i);
 int		ft_isprint(unsigned char c);
-int		ft_strlen(char *s);
+int		ft_strlen(char const *s);
 void	*ft_memset(void *b, int c, unsigned int len);
 void	ft_bzero(void *s, unsigned int n);
 void	*ft_memcpy(void *dst, void *src, unsigned int n);
 void	*ft_memmove(void *dst, void *src, unsigned int len);
+unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
 
 #endif
