@@ -10,18 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	char	*s_tmp;
 
+	s_tmp = (char *)s;
 	i = 0;
-	while (s[i] != '\0')
+	while (s_tmp[i] != '\0')
 	{
-		if (s[i] == c)
-			return (&s[i]);
+		if (s_tmp[i] == c)
+			return (&s_tmp[i]);
 		i++;
 	}
 	if (c == '\0')
-		return (&s[i]);
+		return (&s_tmp[i]);
 	return (0);
 }
