@@ -17,12 +17,12 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 	unsigned int	src_len;
 
 	src_len = ft_strlen(src);
-	while(dstsize--)
+	while (dstsize--)
 	{
 		if (dstsize == 0)
 		{
 			*dst++ = '\0';
-			break;
+			break ;
 		}
 		*dst++ = *src++;
 	}
