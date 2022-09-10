@@ -18,6 +18,7 @@ int	ft_atoi(const char *str)
 	int		base;
 	int		value;
 	int		minus_flag;
+	int		tmp;
 
 	s = (char *)str;
 	value = 0;
