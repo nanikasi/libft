@@ -23,19 +23,23 @@ char	**ft_split(char const *s, char c)
 
 	pp_len = 0;
 	ch_str = (char *)s;
+
+	while (*ch_str == c && *ch_str != '\0')
+		ch_str++;
 	while (*ch_str != '\0')
 	{
-		ch_str = ft_strchr(ch_str, c);
-		if (ch_str == 0)
-			break ;
-		ch_str++;
-		pp_len++;
+		while (*ch_str != c && *ch_str != '\0')
+			ch_str++;
+		while (*ch_str == c && *ch_str != '\0')
+			ch_str++;
+		pp_len ++;
 	}
-	pp_len++;
 	pp = (char **)ft_calloc(pp_len, sizeof(char *));
 	if (pp == NULL)
 		return (NULL);
 	ch_str = (char *)s;
+	while (*ch_str == c && *ch_str != '\0')
+		ch_str++;
 	i = 0;
 	while (i < pp_len)
 	{
@@ -47,7 +51,8 @@ char	**ft_split(char const *s, char c)
 			return (NULL);
 		ft_strlcpy(p, ch_str, p_len + 1);
 		ch_str = &ch_str[p_len];
-		ch_str++;
+		while (*ch_str == c && *ch_str != '\0')
+			ch_str++;
 		pp[i] = p;
 		i++;
 	}
