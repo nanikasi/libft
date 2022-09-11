@@ -23,7 +23,7 @@ char	**ft_split(char const *s, char c)
 
 	pp_len = 0;
 	ch_str = (char *)s;
-	while (ch_str != '\0')
+	while (*ch_str != '\0')
 	{
 		ch_str = ft_strchr(ch_str, c);
 		if (ch_str == 0)
@@ -36,9 +36,9 @@ char	**ft_split(char const *s, char c)
 	if (pp == NULL)
 		return (NULL);
 	ch_str = (char *)s;
+	i = 0;
 	while (i < pp_len)
 	{
-		i = 0;
 		p_len = 0;
 		while (ch_str[p_len] != c && ch_str[p_len] != '\0')
 			p_len++;
@@ -46,6 +46,8 @@ char	**ft_split(char const *s, char c)
 		if (p == NULL)
 			return (NULL);
 		ft_strlcpy(p, ch_str, p_len + 1);
+		ch_str = &ch_str[p_len];
+		ch_str++;
 		pp[i] = p;
 		i++;
 	}
