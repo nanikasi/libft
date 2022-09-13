@@ -12,37 +12,66 @@
 
 #include "libft.h"
 
+long	cal_base(int n);
+size_t	count_len(int n);
+
 char	*ft_itoa(int n)
 {
 	char	*string;
-	char	*tmp_string;
 	size_t	len;
-	long	tmp;
+	long	base;
 
-	len = 0;
-	tmp = n;
-	if (n < 0)
-		len++;
-	while (tmp != 0 || len == 0)
-	{
-		tmp /= 10;
-		len++;
-	}
-	string = (char *)ft_calloc(len + 1, sizeof(char));
+	if (n == 0)
+		return ("0");
+	len = count_len(n);
+	base = cal_base(n);
+	string = (char *)ft_calloc(len, sizeof(char));
 	if (string == NULL)
 		return (NULL);
-	tmp_string = string;
-	tmp = n;
 	if (n < 0)
 	{
-		*tmp_string++ = '-';
-		tmp *= -1;
-		len--;
+		*string++ = '-';
+		n *= -1;
+	}
+	while (base != 0)
+	{
+		*string++ = (n / base) + '0';
+		n %= base;
+		base /= 10;
 	}
 	while (len-- > 0)
-	{
-		tmp_string[len] = (tmp % 10) + '0';
-		tmp /= 10;
-	}
+		string--;
 	return (string);
+}
+
+size_t	count_len(int n)
+{
+	size_t	len;
+	long	base;
+
+	base = 1;
+	if (n < 0)
+	{
+		len++;
+		n *= -1;
+	}
+	while (base <= n)
+	{
+		base *= 10;
+		len++;
+	}
+	return (len);
+}
+
+long	cal_base(int n)
+{
+	long	base;
+
+	base = 1;
+	if (n < 0)
+		n *= -1;
+	while (base <= n)
+		base *= 10;
+	base /= 10;
+	return (base);
 }
