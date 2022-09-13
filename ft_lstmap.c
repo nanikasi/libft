@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nanakani <nanakani@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 15:23:41 by nanakani          #+#    #+#             */
-/*   Updated: 2022/09/13 15:23:41 by nanakani         ###   ########.fr       */
+/*   Created: 2022/09/13 15:23:45 by nanakani          #+#    #+#             */
+/*   Updated: 2022/09/13 15:23:45 by nanakani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*tmp_lst;
+	t_list	**ret_lst;
 
+	ret_lst = (t_list **)malloc(sizeof(t_list *));
+	if (ret_lst == NULL)
+		return (NULL);
 	while (lst != NULL)
 	{
-		tmp_lst = lst;
+		ft_lstadd_back(ret_lst, ft_lstnew(f(lst->content)));
 		lst = lst->next;
-		f(tmp_lst->content);
 	}
+	return (*ret_lst);
 }
