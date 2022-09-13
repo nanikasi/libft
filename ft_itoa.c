@@ -14,6 +14,7 @@
 
 long	cal_base(int n);
 size_t	count_len(int n);
+void	assign(char *string, long base, int n);
 
 char	*ft_itoa(int n)
 {
@@ -21,27 +22,33 @@ char	*ft_itoa(int n)
 	size_t	len;
 	long	base;
 
-	if (n == 0)
-		return ("0");
 	len = count_len(n);
 	base = cal_base(n);
-	string = (char *)ft_calloc(len, sizeof(char));
+	string = (char *)ft_calloc(len + 1, sizeof(char));
 	if (string == NULL)
 		return (NULL);
-	if (n < 0)
+	assign(string, base, n);
+	return (string);
+}
+
+void	assign(char *string, long base, int n)
+{
+	long	long_n;
+
+	long_n = (long)n;
+	if (long_n < 0)
 	{
 		*string++ = '-';
-		n *= -1;
+		long_n *= -1;
 	}
+	if (n == 0)
+		*string++ = '0';
 	while (base != 0)
 	{
-		*string++ = (n / base) + '0';
-		n %= base;
+		*string++ = (long_n / base) + '0';
+		long_n %= base;
 		base /= 10;
 	}
-	while (len-- > 0)
-		string--;
-	return (string);
 }
 
 size_t	count_len(int n)
@@ -49,15 +56,15 @@ size_t	count_len(int n)
 	size_t	len;
 	long	base;
 
-	base = 1;
+	len = 0;
 	if (n < 0)
-	{
 		len++;
-		n *= -1;
-	}
-	while (base <= n)
+	base = cal_base(n);
+	if (base == 0)
+		return (1);
+	while (base != 0)
 	{
-		base *= 10;
+		base /= 10;
 		len++;
 	}
 	return (len);
@@ -66,11 +73,13 @@ size_t	count_len(int n)
 long	cal_base(int n)
 {
 	long	base;
+	long	tmp_n;
 
 	base = 1;
-	if (n < 0)
-		n *= -1;
-	while (base <= n)
+	tmp_n = (long)n;
+	if (tmp_n < 0)
+		tmp_n *= -1;
+	while (base <= tmp_n)
 		base *= 10;
 	base /= 10;
 	return (base);
