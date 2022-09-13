@@ -19,12 +19,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-	{
-		return (NULL);
-	}
+		len = 0;
 	substring = (char *)ft_calloc(len + 1, sizeof(char));
 	if (substring == NULL)
 		return (NULL);
-	ft_strlcpy(substring, &s[start], len + 1);
+	if (start < s_len)
+		ft_strlcpy(substring, &s[start], len + 1);
 	return (substring);
 }
