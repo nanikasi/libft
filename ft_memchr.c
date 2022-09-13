@@ -21,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	string = (char *)s;
 	while (i < n)
 	{
-		if (string[i] == c)
+		if (string[i] == (char)c)
 			return (&string[i]);
 		i++;
 	}
