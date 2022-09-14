@@ -15,28 +15,30 @@
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	int		length_dst_src;
-	size_t	dst_max_size;
-	int		i;
-	int		j;
+	int		dst_i;
+	int		src_i;
 
-	dst_max_size = (size_t)sizeof(dst)/(size_t)sizeof(dst[0]);
-	if (dstsize == 0)
-		return (ft_strlen(src));
-	if (dstsize > dst_max_size)
-		length_dst_src = dst_max_size;
+	if (dstsize > ft_strlen(dst))
+		length_dst_src = ft_strlen(dst) + ft_strlen(src);
 	else
-		length_dst_src = dstsize;
-	i = 0;
-	j = 0;
-	while (dst[i] != '\0')
-		i++;
-	while (i < length_dst_src - 1)
+		length_dst_src = dstsize + ft_strlen(src);
+	if (dstsize == 0)
+		return (length_dst_src);
+	dst_i = 0;
+	src_i = 0;
+	while (dst[dst_i] != '\0')
+		dst_i++;
+	while (dst_i < dstsize - 1)
 	{
-		dst[i] = src[j];
-		i++;
-		j++;
+		if (dst_i > length_dst_src)
+			return (length_dst_src);
+		if (src_i < ft_strlen(src))
+			dst[dst_i] = src[src_i];
+		else
+			dst[dst_i] = '\0';
+		dst_i++;
+		src_i++;
 	}
-	dst[i] = '\0';
-	length_dst_src += ft_strlen(src);
+	dst[dst_i] = '\0';
 	return (length_dst_src);
 }
