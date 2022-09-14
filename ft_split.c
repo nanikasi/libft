@@ -23,7 +23,7 @@ char	**ft_split(char const *s, char c)
 
 	ch_str = (char *)s;
 	pp_len = count_elements(ch_str, c);
-	pp = (char **)ft_calloc(pp_len, sizeof(char *));
+	pp = (char **)ft_calloc(pp_len + 1, sizeof(char *));
 	if (pp == NULL)
 		return (NULL);
 	ch_str = (char *)s;

@@ -29,7 +29,7 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, "-", 1);
 		long_n *= -1;
 	}
-	while (base < long_n)
+	while (base <= long_n)
 		base *= 10;
 	base /= 10;
 	while (base != 0)
