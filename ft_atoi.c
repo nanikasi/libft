@@ -18,30 +18,30 @@ char	*skip(char *s, int *minus_flag);
 int	ft_atoi(const char *str)
 {
 	char	*s;
-	int		base;
-	long	value;
+	long	n;
 	int		minus_flag;
-	int		tmp;
+	long	tmp;
+	int		a_t;
 
 	s = (char *)str;
-	value = 0;
+	n = 0;
 	minus_flag = 1;
 	s = skip(s, &minus_flag);
-	base = 10;
 	while (ft_isdigit(*s))
 	{
-		tmp = value * base;
-		if (value != 0 && tmp / value != base)
+		tmp = n * 10;
+		a_t = (minus_flag * (int)(*s - '0'));
+		if (n != 0 && tmp / n != 10 && ((tmp + a_t) - a_t) == tmp)
 		{
-			if (value < 0)
+			if (n < 0)
 				return ((int)LONG_MIN);
 			else
 				return ((int)LONG_MAX);
 		}
-		value = tmp + (minus_flag * (int)(*s - '0'));
+		n = tmp + a_t;
 		s++;
 	}
-	return ((int)value);
+	return ((int)n);
 }
 
 char	*skip(char *s, int *minus_flag)
