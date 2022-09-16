@@ -15,7 +15,6 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*p;
-	int		i;
 	size_t	square;
 
 	square = count * size;
