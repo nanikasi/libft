@@ -41,31 +41,35 @@ B_SRCS=	ft_lstnew.c \
 		ft_lstdelone.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
-		ft_lstmap.c
+		ft_lstmap.c \
+		$(SRCS)
+
+OBJS_DIR = objs/
 OBJS = $(SRCS:.c=.o)
+PATH_OBJS = $(addprefix $(OBJS_DIR),$(OBJS))
 B_OBJS = $(B_SRCS:.c=.o)
+PATH_B_OBJS = $(addprefix $(OBJS_DIR),$(B_OBJS))
 HEAD := libft.h
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-if_bonus=
 
-ifdef	if_bonus
-	OBJS += $(B_OBJS)
-endif
-
-$(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+$(NAME): $(PATH_OBJS)
+	@ar rc $(NAME) $(PATH_OBJS)
+	@echo "make was done"
 
 all: $(NAME)
 
 .c.o:
-	$(CC) -I $(HEAD) -c $< -o $@
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
+	@echo "Compiling $(<)"
 
-bonus:
-	make if_bonus=1
+bonus: $(PATH_B_OBJS)
+	@ar rc $(NAME) $(PATH_B_OBJS)
+	@echo "make bonus was done"
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
 	rm -f $(NAME)
