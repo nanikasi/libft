@@ -55,18 +55,18 @@ CFLAGS := -Wall -Wextra -Werror
 
 $(NAME): $(PATH_OBJS)
 	@ar rc $(NAME) $(PATH_OBJS)
-	@echo "make was done"
+	@echo "libft done"
 
 all: $(NAME)
 
-.c.o:
+$(OBJS_DIR)%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
 	@echo "Compiling $(<)"
 
 bonus: $(PATH_B_OBJS)
 	@ar rc $(NAME) $(PATH_B_OBJS)
-	@echo "make bonus was done"
+	@echo "libft bonus part was done"
 
 clean:
 	rm -rf $(OBJS_DIR)
