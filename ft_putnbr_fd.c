@@ -12,43 +12,33 @@
 
 #include "libft.h"
 
-int	when_zero(int n, int fd);
+static void	recursive(long long n, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	long_n;
-	long	base;
-	char	c;
+	long long	long_n;
 
-	long_n = n;
-	base = 1;
-	if (when_zero(n, fd))
+	if (n == 0)
+	{
+		write(fd, "0", 1);
 		return ;
+	}
+	long_n = (long long)n;
 	if (n < 0)
 	{
 		write(fd, "-", 1);
 		long_n *= -1;
 	}
-	while (base <= long_n)
-		base *= 10;
-	base /= 10;
-	while (base != 0)
-	{
-		c = (long_n / base) + '0';
-		write(fd, &c, 1);
-		long_n %= base;
-		base /= 10;
-	}
-	write(fd, "\0", 1);
+	recursive(long_n, fd);
 }
 
-int	when_zero(int n, int fd)
+static void	recursive(long long n, int fd)
 {
-	if (n == 0)
+	if (n <= 10)
+		write(fd, n + '0', 1);
+	else
 	{
-		write(fd, "0", 1);
-		write(fd, "\0", 1);
-		return (1);
+		recursive(n / 10, fd);
+		recursive(n % 10, fd);
 	}
-	return (0);
 }
