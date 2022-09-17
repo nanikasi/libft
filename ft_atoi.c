@@ -11,47 +11,59 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 
-char	*skip(char *s, int *minus_flag);
+static char	*skip_space(char *s);
+static long	isoverflow(long n, char c);
+static long	ft_atol(const char *str);
 
 int	ft_atoi(const char *str)
 {
-	char	*s;
-	long	n;
-	int		minus_flag;
-	long	tmp;
-	int		a_t;
-
-	s = (char *)str;
-	n = 0;
-	minus_flag = 1;
-	s = skip(s, &minus_flag);
-	while (ft_isdigit(*s))
-	{
-		tmp = n * 10;
-		a_t = (minus_flag * (int)(*s - '0'));
-		if (n != 0 && tmp / n != 10 && ((tmp + a_t) - a_t) == tmp)
-		{
-			if (n < 0)
-				return ((int)LONG_MIN);
-			else
-				return ((int)LONG_MAX);
-		}
-		n = tmp + a_t;
-		s++;
-	}
-	return ((int)n);
+	return ((int)ft_atol(str));
 }
 
-char	*skip(char *s, int *minus_flag)
+static long	ft_atol(const char *str)
+{
+	char	*s;
+	long	n;
+	int		sign;
+
+	s = (char *)str;
+	s = skip_space(s);
+	if (*s == '-' || *s == '+')
+	{
+		sign = ',' - *s;
+		s++;
+	}
+	n = 0;
+	while (ft_isdigit(*s))
+	{
+		if (isoverflow(n, *s))
+		{
+			if (sign < 0)
+				return (LONG_MIN);
+			else
+				return (LONG_MAX);
+		}
+		n = (n * 10) + (long)(*s - '0');
+		s++;
+	}
+	return (n * sign);
+}
+
+static long	isoverflow(long n, char c)
+{
+	long	tmp;
+	long	long_c;
+
+	tmp = n * 10;
+	long_c = (long)(c - '0');
+	return (tmp / 10 != n || ((tmp + (long)long_c) - (long)long_c) != tmp);
+}
+
+static char	*skip_space(char *s)
 {
 	while (*s == '\t' || *s == '\n' || *s == '\v'
 		|| *s == '\f' || *s == '\r' || *s == ' ')
-		s++;
-	if (*s == '-')
-		*minus_flag = -1;
-	if (*s == '-' || *s == '+')
 		s++;
 	return (s);
 }
