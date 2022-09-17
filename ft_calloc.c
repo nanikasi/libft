@@ -17,12 +17,17 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*p;
 	size_t	square;
 
+	if (count == 0 || size == 0)
+	{
+		count = 1;
+		size = 1;
+	}
 	square = count * size;
 	if (square / count != size)
 		return (NULL);
-	p = (void *)malloc(size * count);
+	p = malloc(size * count);
 	if (p == NULL)
 		return (NULL);
-	ft_memset(p, 0, size * count);
+	ft_memset(p, '\0', size * count);
 	return (p);
 }
