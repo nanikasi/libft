@@ -14,20 +14,20 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		len;
+	size_t	len;
 	char	*ch_s1;
 	char	*p;
 
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	len = 0;
 	ch_s1 = (char *)s1;
 	while (ft_strchr(set, *ch_s1) && *ch_s1 != '\0')
 		ch_s1++;
 	len = ft_strlen(ch_s1);
-	len--;
-	while (len > 0 && ft_strchr(set, ch_s1[len]))
+	while (len > 0 && ft_strchr(set, ch_s1[len - 1]))
 		len--;
-	len++;
-	p = (char *)ft_calloc(len + 1, sizeof(char));
+	p = (char *)malloc((len + 1) * sizeof(char));
 	if (p == NULL)
 		return (NULL);
 	ft_strlcpy(p, ch_s1, len + 1);
