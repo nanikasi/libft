@@ -19,7 +19,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	haystack_len;
 	size_t	needle_len;
 
-	if (haystack == NULL && len == 0)
+	if (haystack == NULL && len == 0 && needle != NULL)
 		return (NULL);
 	needle_len = ft_strlen(needle);
 	haystack_len = ft_strlen(haystack);

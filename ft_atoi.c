@@ -53,12 +53,12 @@ static long	ft_atol(const char *str)
 
 static long	isoverflow(long n, char c)
 {
-	long	tmp;
+	long	square;
 	long	long_c;
 
-	tmp = n * 10;
+	square = n * 10;
 	long_c = (long)(c - '0');
-	return (tmp / 10 != n || ((tmp + (long)long_c) - (long)long_c) != tmp);
+	return (square / 10 != n || LONG_MAX - long_c < square);
 }
 
 static char	*skip_space(char *s)

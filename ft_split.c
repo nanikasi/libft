@@ -22,13 +22,13 @@ char	**ft_split(char const *s, char c)
 	char	*ch_str;
 
 	ch_str = (char *)s;
-	if (s == NULL)
-		return (NULL);
 	pp_len = count_elements(ch_str, c);
 	pp = (char **)malloc((pp_len + 1) * sizeof(char *));
 	if (pp == NULL)
 		return (NULL);
 	pp[pp_len] = (char *)NULL;
+	if (ch_str == NULL)
+		return (pp);
 	ch_str = (char *)s;
 	assign_p(ch_str, c, pp);
 	return (pp);
@@ -39,6 +39,8 @@ size_t	count_elements(char *ch_str, char c)
 	size_t	pp_len;
 
 	pp_len = 0;
+	if (ch_str == NULL)
+		return (0);
 	while (*ch_str != '\0')
 	{
 		if (*ch_str != c)
