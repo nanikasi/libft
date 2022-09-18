@@ -22,8 +22,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	uc_src = (char unsigned *)src;
 	if (uc_dst == NULL && uc_src == NULL)
 		return (NULL);
-	if (len == 0)
-		return (dst);
 	if (uc_dst < uc_src)
 		ft_memcpy(dst, src, len);
 	else
