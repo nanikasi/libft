@@ -22,10 +22,13 @@ char	**ft_split(char const *s, char c)
 	char	*ch_str;
 
 	ch_str = (char *)s;
+	if (s == NULL)
+		return (NULL);
 	pp_len = count_elements(ch_str, c);
-	pp = (char **)ft_calloc(pp_len + 1, sizeof(char *));
+	pp = (char **)malloc((pp_len + 1) * sizeof(char *));
 	if (pp == NULL)
 		return (NULL);
+	pp[pp_len] = (char *)NULL;
 	ch_str = (char *)s;
 	assign_p(ch_str, c, pp);
 	return (pp);
@@ -62,7 +65,7 @@ void	assign_p(char *ch_str, char c, char **pp)
 			p_len = 0;
 			while (ch_str[p_len] != c && ch_str[p_len] != '\0')
 				p_len++;
-			p = (char *)ft_calloc(p_len + 1, sizeof(char));
+			p = (char *)malloc((p_len + 1) * sizeof(char));
 			if (p == NULL)
 				return ;
 			ft_strlcpy(p, ch_str, p_len + 1);
@@ -74,5 +77,4 @@ void	assign_p(char *ch_str, char c, char **pp)
 		while (*ch_str == c && *ch_str != '\0')
 			ch_str++;
 	}
-	return ;
 }
