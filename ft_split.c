@@ -26,7 +26,7 @@ char	**ft_split(char const *s, char c)
 	pp = (char **)malloc((pp_len + 1) * sizeof(char *));
 	if (pp == NULL)
 		return (NULL);
-	pp[pp_len] = (char *)NULL;
+	pp[pp_len] = (char *) NULL;
 	if (ch_str == NULL)
 		return (pp);
 	ch_str = (char *)s;

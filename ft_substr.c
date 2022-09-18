@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		if (substring == NULL)
 			return (NULL);
 		substring[0] = '\0';
-		return substring;
+		return (substring);
 	}
 	max_len = ft_strlen(&s[start]);
 	if (start + s_len <= len)

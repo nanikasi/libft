@@ -27,8 +27,7 @@ static long	ft_atol(const char *str)
 	long	n;
 	int		sign;
 
-	s = (char *)str;
-	s = skip_space(s);
+	s = skip_space((char *)str);
 	sign = 1;
 	if (*s == '-' || *s == '+')
 	{
