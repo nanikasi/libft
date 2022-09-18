@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
+	size_t	i;
 	char	*s_tmp;
 
 	s_tmp = (char *)s;
@@ -25,5 +27,5 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (c == '\0')
 		return (&s_tmp[i]);
-	return (0);
+	return (NULL);
 }
