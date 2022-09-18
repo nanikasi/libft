@@ -20,20 +20,18 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	uc_dst = (char unsigned *)dst;
 	uc_src = (char unsigned *)src;
-	i = 0;
 	if (uc_dst == NULL && uc_src == NULL)
 		return (NULL);
 	if (len == 0)
 		return (dst);
-	if (len > ft_strlen(src))
-		len = ft_strlen(src);
 	if (uc_dst < uc_src)
 		ft_memcpy(dst, src, len);
 	else
 	{
+		i = 0;
 		while (i < len)
 		{
-			uc_dst[len - i] = uc_src[len - i];
+			uc_dst[len - (i + 1)] = uc_src[len - (i + 1)];
 			i++;
 		}
 	}
