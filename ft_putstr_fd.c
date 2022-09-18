@@ -16,6 +16,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
 
+	if (s == NULL)
+		return ;
 	len = ft_strlen(s);
 	while (len > SSIZE_MAX)
 	{
