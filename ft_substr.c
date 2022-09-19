@@ -30,7 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (substring);
 	}
 	max_len = ft_strlen(&s[start]);
-	if (start + s_len <= len)
+	if (start + len > s_len)
 		len = max_len;
 	substring = (char *)malloc((len + 1) * sizeof(char));
 	if (substring == NULL)

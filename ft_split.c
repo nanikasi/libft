@@ -12,8 +12,10 @@
 
 #include "libft.h"
 
-size_t	count_elements(char *ch_str, char c);
-void	assign_p(char *ch_str, char c, char **pp);
+static size_t	count_elements(char *ch_str, char c);
+static char		**assign_p(char *ch_str, char c, char **pp);
+static void		memory_free(char **pp, size_t index);
+static char		*allocate_memory(char **pp, size_t index, size_t p_len);
 
 char	**ft_split(char const *s, char c)
 {
@@ -29,12 +31,11 @@ char	**ft_split(char const *s, char c)
 	pp[pp_len] = (char *) NULL;
 	if (ch_str == NULL)
 		return (pp);
-	ch_str = (char *)s;
-	assign_p(ch_str, c, pp);
+	pp = assign_p(ch_str, c, pp);
 	return (pp);
 }
 
-size_t	count_elements(char *ch_str, char c)
+static size_t	count_elements(char *ch_str, char c)
 {
 	size_t	pp_len;
 
@@ -53,9 +54,9 @@ size_t	count_elements(char *ch_str, char c)
 	return (pp_len);
 }
 
-void	assign_p(char *ch_str, char c, char **pp)
+static char	**assign_p(char *ch_str, char c, char **pp)
 {
-	int		i;
+	size_t	i;
 	size_t	p_len;
 	char	*p;
 
@@ -67,9 +68,9 @@ void	assign_p(char *ch_str, char c, char **pp)
 			p_len = 0;
 			while (ch_str[p_len] != c && ch_str[p_len] != '\0')
 				p_len++;
-			p = (char *)malloc((p_len + 1) * sizeof(char));
+			p = allocate_memory(pp, i, p_len);
 			if (p == NULL)
-				return ;
+				return (NULL);
 			ft_strlcpy(p, ch_str, p_len + 1);
 			pp[i] = p;
 			i++;
@@ -79,4 +80,30 @@ void	assign_p(char *ch_str, char c, char **pp)
 		while (*ch_str == c && *ch_str != '\0')
 			ch_str++;
 	}
+	return (pp);
+}
+
+static char	*allocate_memory(char **pp, size_t index, size_t p_len)
+{
+	char	*p;
+
+	p = (char *)malloc((p_len + 1) * sizeof(char));
+	if (p == NULL)
+	{
+		memory_free(pp, index);
+		return (NULL);
+	}
+	return (p);
+}
+
+static void	memory_free(char **pp, size_t index)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < index)
+	{
+		free(pp[i]);
+	}
+	free(pp);
 }

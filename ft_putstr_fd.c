@@ -23,7 +23,7 @@ void	ft_putstr_fd(char *s, int fd)
 	{
 		write(fd, s, SSIZE_MAX);
 		s += SSIZE_MAX;
-		len = ft_strlen(s);
+		len -= SSIZE_MAX;
 	}
 	write(fd, s, len);
 }

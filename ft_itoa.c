@@ -35,7 +35,7 @@ char	*ft_itoa(int n)
 		index += 1;
 	}
 	recursive(long_n, string, &index);
-	string[index] = '\0';
+	string[len] = '\0';
 	return (string);
 }
 

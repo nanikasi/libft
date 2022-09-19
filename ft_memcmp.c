@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -21,10 +21,10 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	uc_s1 = (unsigned char *)s1;
 	uc_s2 = (unsigned char *)s2;
-	while (n > i)
+	while (i < n)
 	{
 		if (uc_s1[i] != uc_s2[i])
-			return (uc_s1[i] - uc_s2[i]);
+			return ((int)(uc_s1[i] - uc_s2[i]));
 		i ++;
 	}
 	return (0);
