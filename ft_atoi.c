@@ -62,8 +62,7 @@ static long	isoverflow(long n, char c)
 
 static char	*skip_space(char *s)
 {
-	while (*s == '\t' || *s == '\n' || *s == '\v'
-		|| *s == '\f' || *s == '\r' || *s == ' ')
+	while (ft_strchr(" \t\n\v\f\r", *s))
 		s++;
 	return (s);
 }

@@ -19,11 +19,11 @@ void	ft_putstr_fd(char *s, int fd)
 	if (s == NULL)
 		return ;
 	len = ft_strlen(s);
-	while (len > SSIZE_MAX)
+	while (len > SIZE_MAX)
 	{
-		write(fd, s, SSIZE_MAX);
-		s += SSIZE_MAX;
-		len -= SSIZE_MAX;
+		write(fd, s, SIZE_MAX);
+		s += SIZE_MAX;
+		len -= SIZE_MAX;
 	}
 	write(fd, s, len);
 }
